@@ -11,4 +11,10 @@ pkgs.mkShell {
     pnpm
     nodejs_22
   ];
+
+  shellHook = ''
+    echo
+    echo -e "\033[1;35mwelcome to the development shell!\033[0m"
+    echo
+  '';
 }
