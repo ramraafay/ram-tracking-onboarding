@@ -1,5 +1,5 @@
 # Raf Shahid's RAM Tracking Onboarding Project
-Project to familiarise myself with the RAM Tracking technology stack
+Project to familiarise myself with the RAM Tracking technology stack.
 
 ## Dependencies
 - nix
@@ -12,7 +12,7 @@ Activate development environment by running…
 nix-shell
 ```
 
-Or using shell hooked with direnv…
+Or if you're using a shell hooked with direnv…
 
 ```sh
 echo use nix > .envrc
