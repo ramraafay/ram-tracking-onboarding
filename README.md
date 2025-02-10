@@ -1,4 +1,4 @@
-# Raf Shahid's RAM Tracking Onboarding Project
+# Raf's RAM Tracking Onboarding Project
 Project to familiarise myself with the RAM Tracking technology stack.
 
 ## Dependencies
