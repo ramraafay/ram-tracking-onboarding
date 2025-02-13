@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/places")
 public class PlaceController {
 
-    private PlaceRepository placeRepository;
+    private final PlaceRepository placeRepository;
 
     @GetMapping
     public List<Place> getPlaces(Authentication authentication) {

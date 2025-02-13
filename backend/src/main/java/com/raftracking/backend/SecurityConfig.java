@@ -7,20 +7,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity // Enables method-level security annotations like @PreAuthorize
 public class SecurityConfig {
 
     @Bean
-    @SuppressWarnings("removal")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        http.csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity (not recommended
+                // in production)
                 .authorizeHttpRequests(
                         auth ->
                                 auth.requestMatchers("/h2-console/**")
-                                        .permitAll()
+                                        .permitAll() // Allow access to H2 console
                                         .anyRequest()
-                                        .authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt());
+                                        .authenticated() // Require authentication for all other
+                        // requests
+                        )
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt()); // Enable JWT-based authentication
 
         return http.build();
     }
