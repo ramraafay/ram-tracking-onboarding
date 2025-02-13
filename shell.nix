@@ -7,6 +7,7 @@ pkgs.mkShell {
     jdk21
     maven3
     google-java-format
+    postman
     # frontend
     pnpm
     nodejs_22
