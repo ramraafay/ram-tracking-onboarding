@@ -11,6 +11,15 @@ function LoginStatus() {
           <p>Logged in</p>
           <p>{auth.token}</p>
           <button onClick={() => auth.logOut()}>Logout</button>
+          <AuthContext.Provider value={auth}>
+            <button
+              onClick={() => {
+                console.log(auth.token);
+              }}
+            >
+              post
+            </button>
+          </AuthContext.Provider>
         </div>
       ) : (
         <div>
