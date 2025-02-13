@@ -10,6 +10,7 @@ pkgs.mkShell {
     # frontend
     pnpm
     nodejs_22
+    nodePackages.prettier
   ];
 
   shellHook = ''
