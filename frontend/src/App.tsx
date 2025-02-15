@@ -1,6 +1,7 @@
-import "./App.css";
 import { AuthProvider, TAuthConfig } from "react-oauth2-code-pkce";
 import LoginStatus from "./components/LoginStatus";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   const authConfig: TAuthConfig = {
@@ -16,9 +17,13 @@ function App() {
   };
 
   return (
-    <AuthProvider authConfig={authConfig}>
-      <LoginStatus />
-    </AuthProvider>
+    <div className="bg-red-500">
+      <AuthProvider authConfig={authConfig}>
+        <Header />
+        <LoginStatus />
+        <Footer />
+      </AuthProvider>
+    </div>
   );
 }
 

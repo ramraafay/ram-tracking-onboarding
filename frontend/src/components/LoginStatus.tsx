@@ -9,7 +9,6 @@ function LoginStatus() {
       {auth.token ? (
         <div>
           <p>Logged in</p>
-          <p>{auth.token}</p>
           <button onClick={() => auth.logOut()}>Logout</button>
           <AuthContext.Provider value={auth}>
             <button
@@ -17,7 +16,7 @@ function LoginStatus() {
                 console.log(auth.token);
               }}
             >
-              post
+              print token
             </button>
           </AuthContext.Provider>
         </div>
