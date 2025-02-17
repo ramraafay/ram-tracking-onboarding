@@ -1,3 +1,8 @@
-.leaflet-container { width: 100%; height: 100vh;}
+.leaflet-container {
+	width: 100%;
+	height: 50vw;
+	border-radius: 10px;
+	border: 1px solid lightgray;
+}
 @import 'leaflet/dist/leaflet.css';
 @import "tailwindcss"
