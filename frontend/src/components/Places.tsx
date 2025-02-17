@@ -16,7 +16,9 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
     },
   );
 
-  return (
+  return loading ? (
+    <h1>Loading..</h1>
+  ) : (
     <div>
       <Button
         colour={ButtonColour.Purple}
