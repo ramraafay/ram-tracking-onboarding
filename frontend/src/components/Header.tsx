@@ -7,7 +7,7 @@ function Header() {
   return (
     <header>
       <div className="mb-4">
-        <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col items-start gap-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
               RAF Tracking
@@ -17,7 +17,6 @@ function Header() {
               Favourite places demo.
             </p>
           </div>
-
           <div className="flex items-center gap-4">
             <a
               className="inline-flex items-center justify-center gap-1.5 rounded-sm border border-gray-200 bg-white px-5 py-3 text-gray-900 transition hover:text-gray-700 focus:ring-3 focus:outline-hidden"
