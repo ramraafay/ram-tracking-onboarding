@@ -19,7 +19,7 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
   return loading ? (
     <h1>Loading..</h1>
   ) : (
-    <div>
+    <div className="flex flex-col gap-4">
       <Button
         colour={ButtonColour.Purple}
         onClick={() => console.log(authToken)}

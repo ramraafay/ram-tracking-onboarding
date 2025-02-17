@@ -19,7 +19,7 @@ function Login() {
           <Button colour={ButtonColour.Red} onClick={() => auth.logOut()}>
             Logout
           </Button>
-          <div className="pt-4 flex flex-col gap-4 w-min">
+          <div className="mt-4 flex flex-col">
             <Places authToken={auth.token} />
           </div>
         </div>
