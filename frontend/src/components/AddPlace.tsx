@@ -7,10 +7,23 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
-  const { data, loading, error } = useFetch<PlaceDTO[]>(
+  const place: PlaceDTO = {
+    id: 1,
+    name: "test",
+    latitude: 0,
+    longitude: 0,
+    userId: "1",
+  };
+
+  const { data, loading, error } = useFetch<PlaceDTO>(
     "http://localhost:8080/places",
     {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       token: authToken,
+      body: JSON.stringify(place),
     },
   );
 
