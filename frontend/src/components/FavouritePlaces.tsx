@@ -16,6 +16,9 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
         <thead>
           <tr>
             <th className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              #
+            </th>
+            <th className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Name
             </th>
             <th className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -31,9 +34,16 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
         </thead>
         <tbody>
           {data ? (
-            data.map((item, index) => <div key={index}>egg</div>)
+            data.map((item, index) => (
+              <Place
+                index={index}
+                name={item.name}
+                latitude={item.latitude}
+                longitude={item.longitude}
+              />
+            ))
           ) : (
-            <p>bruh</p>
+            <Place index={0} name="-" latitude={0} longitude={0} />
           )}
         </tbody>
       </table>
