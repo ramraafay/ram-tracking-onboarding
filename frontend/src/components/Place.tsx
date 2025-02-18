@@ -1,10 +1,28 @@
-import { useContext } from "react";
-import { AuthContext, IAuthContext } from "react-oauth2-code-pkce";
-
-function Place() {
-  const auth: IAuthContext = useContext(AuthContext);
-
-  return <div>place</div>;
+function Place({
+  name,
+  latitude,
+  longitude,
+}: {
+  name: string;
+  latitude: number;
+  longitude: number;
+}) {
+  return (
+    <tr>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {name}
+      </td>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {latitude}
+      </td>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {longitude}
+      </td>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <button className="text-indigo-600 hover:text-indigo-900">View</button>
+      </td>
+    </tr>
+  );
 }
 
 export default Place;

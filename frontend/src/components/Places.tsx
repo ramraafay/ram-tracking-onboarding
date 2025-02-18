@@ -1,16 +1,18 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
-import { Place } from "../types/Place";
+import { PlaceDTO } from "../types/PlaceDTO";
 import Button from "./Button";
 import { ButtonColour } from "../types/ButtonColor";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import FavouritePlaces from "./FavouritePlaces";
+import AddPlace from "./AddPlace";
 
 interface PlacesProps {
   authToken: string;
 }
 
 const Places: React.FC<PlacesProps> = ({ authToken }) => {
-  const { data, loading, error } = useFetch<Place>(
+  const { data, loading, error } = useFetch<PlaceDTO>(
     "http://localhost:8080/places",
     {
       token: authToken,
@@ -44,6 +46,8 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
       >
         Check for error
       </Button>
+      <AddPlace authToken={authToken} />
+      <FavouritePlaces authToken={authToken} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-export interface Place {
+export interface PlaceDTO {
   id: number;
   name: string;
   latitude: number;
