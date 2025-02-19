@@ -3,7 +3,14 @@ import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
 import Button from "./Button";
 import { ButtonColour } from "../types/ButtonColor";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import FavouritePlaces from "./FavouritePlaces";
 import AddPlace from "./AddPlace";
 
@@ -18,6 +25,16 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
       token: authToken,
     },
   );
+
+  const MapEvents = () => {
+    useMapEvents({
+      click(e) {
+        console.log(e.latlng.lat);
+        console.log(e.latlng.lng);
+      },
+    });
+    return false;
+  };
 
   const handleDelete = async (id?: number) => {
     try {
@@ -59,6 +76,7 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+          <MapEvents />
           {data &&
             data.map((place) => (
               <Marker
