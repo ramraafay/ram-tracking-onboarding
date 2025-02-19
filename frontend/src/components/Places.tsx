@@ -44,26 +44,37 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
     <h1>Loading..</h1>
   ) : (
     <div className="flex flex-col gap-4">
-      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {data &&
-          data.map((place) => (
-            <Marker position={[place.latitude, place.longitude]}>
-              <Popup>
-                {place.name}
-                <Button
-                  colour={ButtonColour.Red}
-                  onClick={() => handleDelete(place.id)}
-                >
-                  Delete
-                </Button>
-              </Popup>
-            </Marker>
-          ))}
-      </MapContainer>
+      <div
+        onContextMenu={(e) => {
+          e.preventDefault();
+          console.log("hello");
+        }}
+      >
+        <MapContainer
+          center={[51.505, -0.09]}
+          zoom={13}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {data &&
+            data.map((place) => (
+              <Marker position={[place.latitude, place.longitude]}>
+                <Popup>
+                  {place.name}
+                  <Button
+                    colour={ButtonColour.Red}
+                    onClick={() => handleDelete(place.id)}
+                  >
+                    Delete
+                  </Button>
+                </Popup>
+              </Marker>
+            ))}
+        </MapContainer>
+      </div>
       <Button
         colour={ButtonColour.Purple}
         onClick={() => console.log(authToken)}
