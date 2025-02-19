@@ -1,6 +1,8 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
+import Button from "./Button";
+import { ButtonColour } from "../types/ButtonColor";
 
 const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
   const { data, loading, error, refetch } = useFetch<PlaceDTO[]>(
@@ -70,12 +72,12 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
                   {item.longitude}
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <button
-                    className="text-red-600 hover:text-black"
+                  <Button
+                    colour={ButtonColour.Red}
                     onClick={() => handleDelete(item.id)}
                   >
                     Delete
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))

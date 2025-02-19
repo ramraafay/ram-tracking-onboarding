@@ -61,7 +61,10 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
           />
           {data &&
             data.map((place) => (
-              <Marker position={[place.latitude, place.longitude]}>
+              <Marker
+                key={place.id}
+                position={[place.latitude, place.longitude]}
+              >
                 <Popup>
                   {place.name}
                   <Button
