@@ -12,12 +12,33 @@ interface PlacesProps {
 }
 
 const Places: React.FC<PlacesProps> = ({ authToken }) => {
-  const { data, loading, error } = useFetch<PlaceDTO[]>(
+  const { data, loading, error, refetch } = useFetch<PlaceDTO[]>(
     "http://localhost:8080/places",
     {
       token: authToken,
     },
   );
+
+  const handleDelete = async (id?: number) => {
+    try {
+      const response = await fetch(`http://localhost:8080/places/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      if (response.ok) {
+        console.log("Delete successful");
+        refetch();
+      } else {
+        console.error("Delete failed");
+      }
+    } catch (error) {
+      console.error("Error during delete request", error);
+    }
+  };
 
   return loading ? (
     <h1>Loading..</h1>
@@ -31,7 +52,15 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
         {data &&
           data.map((place) => (
             <Marker position={[place.latitude, place.longitude]}>
-              <Popup>{place.name}</Popup>
+              <Popup>
+                {place.name}
+                <Button
+                  colour={ButtonColour.Red}
+                  onClick={() => handleDelete(place.id)}
+                >
+                  Delete
+                </Button>
+              </Popup>
             </Marker>
           ))}
       </MapContainer>
