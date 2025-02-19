@@ -7,9 +7,9 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   const [longitude, setLongitude] = useState("");
 
   const place: PlaceDTO = {
-    name: "test",
-    latitude: 0,
-    longitude: 0,
+    name: name,
+    latitude: Number(latitude),
+    longitude: Number(longitude),
   };
 
   const post = async () => {
@@ -52,7 +52,12 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
         <input
           type="text"
           value={latitude}
-          onChange={(e) => setLatitude(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^-?\d*\.?\d*$/.test(value)) {
+              setLatitude(value);
+            }
+          }}
           className="w-full p-2 border border-gray-300 rounded-lg"
           placeholder="Enter latitude"
         />
@@ -62,7 +67,12 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
         <input
           type="text"
           value={longitude}
-          onChange={(e) => setLongitude(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^-?\d*\.?\d*$/.test(value)) {
+              setLongitude(value);
+            }
+          }}
           className="w-full p-2 border border-gray-300 rounded-lg"
           placeholder="Enter longitude"
         />
