@@ -9,6 +9,27 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
       token: authToken,
     },
   );
+
+  const handleDelete = async (id?: number) => {
+    try {
+      const response = await fetch(`http://localhost:8080/places/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      if (response.ok) {
+        console.log("Delete successful");
+      } else {
+        console.error("Delete failed");
+      }
+    } catch (error) {
+      console.error("Error during delete request", error);
+    }
+  };
+
   return (
     <div className="rounded bg-white shadow-md overflow-hidden">
       <table className="min-w-full leading-normal">
@@ -48,7 +69,10 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
                   {item.longitude}
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <button className="text-red-600 hover:text-black">
+                  <button
+                    className="text-red-600 hover:text-black"
+                    onClick={() => handleDelete(item.id)}
+                  >
                     Delete
                   </button>
                 </td>
