@@ -3,7 +3,7 @@ import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
 
 const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
-  const { data, loading, error } = useFetch<PlaceDTO[]>(
+  const { data, loading, error, refetch } = useFetch<PlaceDTO[]>(
     "http://localhost:8080/places",
     {
       token: authToken,
@@ -22,6 +22,7 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
 
       if (response.ok) {
         console.log("Delete successful");
+        refetch();
       } else {
         console.error("Delete failed");
       }
