@@ -12,7 +12,7 @@ interface PlacesProps {
 }
 
 const Places: React.FC<PlacesProps> = ({ authToken }) => {
-  const { data, loading, error } = useFetch<PlaceDTO>(
+  const { data, loading, error } = useFetch<PlaceDTO[]>(
     "http://localhost:8080/places",
     {
       token: authToken,
@@ -45,6 +45,9 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
         onClick={() => console.log(error ? ":-(" : ":-)")}
       >
         Check for error
+      </Button>
+      <Button colour={ButtonColour.Purple} onClick={() => console.log(data)}>
+        Print Data
       </Button>
       <AddPlace authToken={authToken} />
       <FavouritePlaces authToken={authToken} />
