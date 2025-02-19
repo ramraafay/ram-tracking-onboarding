@@ -76,9 +76,8 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
   const MapEvents = () => {
     useMapEvents({
       contextmenu(e) {
-        console.log(e.latlng.lat);
-        console.log(e.latlng.lng);
         post(e.latlng.lat, e.latlng.lng);
+        refetch();
       },
     });
     return false;
