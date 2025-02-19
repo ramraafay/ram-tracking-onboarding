@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
 
 const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
@@ -7,31 +6,32 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
-  const places: PlaceDTO[] = [];
-
   const place: PlaceDTO = {
     name: "test",
     latitude: 0,
     longitude: 0,
   };
 
-  places.push(place);
+  const post = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/places", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(place),
+      });
 
-  const { data, loading, error } = useFetch<PlaceDTO[]>(
-    "http://localhost:8080/places",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      token: authToken,
-      body: JSON.stringify(place),
-    },
-  );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-  const handleSubmit = () => {
-    console.log({ name, latitude, longitude });
-    // Add your logic to handle the data here
+      const responseData = await response.json();
+      console.log("Success:", responseData);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -68,7 +68,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
         />
       </div>
       <button
-        onClick={handleSubmit}
+        onClick={post}
         className="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
       >
         Add Place
