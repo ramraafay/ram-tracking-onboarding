@@ -1,7 +1,6 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
-import Place from "./Place";
 
 const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
   const { data, loading, error } = useFetch<PlaceDTO[]>(
@@ -33,17 +32,37 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
           </tr>
         </thead>
         <tbody>
-          {data ? (
+          {data && data.length > 0 ? (
             data.map((item, index) => (
-              <Place
-                index={index}
-                name={item.name}
-                latitude={item.latitude}
-                longitude={item.longitude}
-              />
+              <tr key={index}>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  {item.id}
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  {item.name}
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  {item.latitude}
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  {item.longitude}
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <button className="text-red-600 hover:text-black">
+                    Delete
+                  </button>
+                </td>
+              </tr>
             ))
           ) : (
-            <Place index={0} name="-" latitude={0} longitude={0} />
+            <tr>
+              <td
+                className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center"
+                colSpan={5}
+              >
+                you've not been anywhere!
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
