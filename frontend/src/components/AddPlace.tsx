@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PlaceDTO } from "../types/PlaceDTO";
+import { ButtonColour } from "../types/ButtonColor";
 
 const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   const [name, setName] = useState("");
@@ -35,7 +36,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md w-full h-1/2">
+    <div className="p-4 bg-white rounded-lg shadow-md w-full h-[50vh]">
       <h2 className="text-xl font-bold mb-4">Add a New Place</h2>
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Place Name</label>
@@ -79,7 +80,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
       </div>
       <button
         onClick={post}
-        className="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        className={`inline-block rounded-sm ${ButtonColour.Blue} px-5 py-3 text-sm font-medium text-white transition hover:bg-black focus:ring-3 focus:outline-hidden text-nowrap w-full`}
       >
         Add Place
       </button>
