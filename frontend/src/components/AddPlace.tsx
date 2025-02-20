@@ -6,7 +6,8 @@ const AddPlace: React.FC<{
   authToken: string;
   initialLatitude: number;
   initialLongitude: number;
-}> = ({ authToken, initialLatitude, initialLongitude }) => {
+  onPlaceAdd: () => void;
+}> = ({ authToken, initialLatitude, initialLongitude, onPlaceAdd }) => {
   const [name, setName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
@@ -35,6 +36,7 @@ const AddPlace: React.FC<{
     } catch (error) {
       console.error("Error:", error);
     }
+    onPlaceAdd();
   };
 
   return (

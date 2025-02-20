@@ -49,13 +49,17 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
     }
   };
 
+  const handleAdd = () => {
+    viewDetails(details ? false : true);
+    refetch();
+  };
+
   const MapEvents = () => {
     useMapEvents({
       contextmenu(e) {
-        viewDetails(true);
         setLatitude(e.latlng.lat);
         setLongitude(e.latlng.lng);
-        refetch();
+        handleAdd();
       },
     });
     return false;
@@ -130,9 +134,10 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
             authToken={authToken}
             initialLatitude={latitude}
             initialLongitude={longitude}
+            onPlaceAdd={handleAdd}
           />
         )}
-        <FavouritePlaces authToken={authToken} />
+        <FavouritePlaces authToken={authToken} onPlaceDelete={refetch} />
       </div>
     </div>
   );

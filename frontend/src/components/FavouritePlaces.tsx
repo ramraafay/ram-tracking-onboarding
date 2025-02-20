@@ -4,8 +4,11 @@ import { PlaceDTO } from "../types/PlaceDTO";
 import Button from "./Button";
 import { ButtonColour } from "../types/ButtonColor";
 
-const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
-  const { data, loading, error, refetch } = useFetch<PlaceDTO[]>(
+const FavouritePlaces: React.FC<{
+  authToken: string;
+  onPlaceDelete: () => void;
+}> = ({ authToken, onPlaceDelete }) => {
+  const { data, refetch } = useFetch<PlaceDTO[]>(
     "http://localhost:8080/places",
     {
       token: authToken,
@@ -31,6 +34,7 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
     } catch (error) {
       console.error("Error during delete request", error);
     }
+    onPlaceDelete();
   };
 
   return (
