@@ -76,12 +76,12 @@ const PlaceList: React.FC<{
                   {item.longitude}
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <Button
-                    colour={ButtonColour.Red}
+                  <button
                     onClick={() => handleDelete(item.id)}
+                    className="inline-block rounded-[5px] px-5 py-3 text-sm font-medium text-red-600 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden text-nowrap w-min cursor-pointer"
                   >
                     Delete
-                  </Button>
+                  </button>
                 </td>
               </tr>
             ))
