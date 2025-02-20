@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="bg-gray-50 min-h-screen min-w-screen">
-      <div className="w-full h-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className="w-full h-full mx-auto max-w-screen-lg px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <AuthProvider authConfig={authConfig}>
           <Header />
           <Login />
