@@ -36,19 +36,19 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md w-full h-[50vh]">
+    <div className="p-4 bg-white rounded-lg shadow-md w-full h-[50vh] flex flex-col justify-between">
       <h2 className="text-xl font-bold mb-4">Add a New Place</h2>
-      <div className="mb-4">
+      <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Place Name</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="flex-grow p-2 border border-gray-300 rounded-lg"
           placeholder="Enter place name"
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Latitude</label>
         <input
           type="text"
@@ -59,11 +59,11 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
               setLatitude(value);
             }
           }}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="flex-grow p-2 border border-gray-300 rounded-lg"
           placeholder="Enter latitude"
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Longitude</label>
         <input
           type="text"
@@ -74,7 +74,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
               setLongitude(value);
             }
           }}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="flex-grow p-2 border border-gray-300 rounded-lg"
           placeholder="Enter longitude"
         />
       </div>
