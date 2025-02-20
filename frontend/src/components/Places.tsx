@@ -66,18 +66,18 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
   ) : (
     <div>
       <div className="flex border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-t-[10px] shadow-md">
-        <div
+        <button
           onClick={() => viewDetails(false)}
           className={`flex-1 text-center cursor-pointer px-5 py-3 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden rounded-tl-[10px] ${!details && `${ButtonColour.Blue} text-white`}`}
         >
           Map
-        </div>
-        <div
+        </button>
+        <button
           onClick={() => viewDetails(true)}
           className={`flex-1 text-center cursor-pointer px-5 py-3 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden rounded-tr-[10px] ${details && `${ButtonColour.Blue} text-white`}`}
         >
           Details
-        </div>
+        </button>
       </div>
       <div className="flex flex-col gap-4">
         {!details ? (
