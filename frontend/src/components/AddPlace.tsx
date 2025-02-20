@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { PlaceDTO } from "../types/PlaceDTO";
 import { ButtonColour } from "../types/ButtonColor";
 
-const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
+const AddPlace: React.FC<{
+  authToken: string;
+  initialLatitude: number;
+  initialLongitude: number;
+}> = ({ authToken, initialLatitude, initialLongitude }) => {
   const [name, setName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
   const place: PlaceDTO = {
     name: name,
-    latitude: Number(latitude),
-    longitude: Number(longitude),
+    latitude: Number(latitude ? latitude : initialLatitude),
+    longitude: Number(longitude ? longitude : initialLongitude),
   };
 
   const post = async () => {
@@ -23,11 +27,9 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
         },
         body: JSON.stringify(place),
       });
-
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-
       const responseData = await response.json();
       console.log("Success:", responseData);
     } catch (error) {
@@ -52,14 +54,14 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
         <label className="block text-sm font-medium mb-2">Latitude</label>
         <input
           type="text"
-          value={latitude}
+          value={latitude ? latitude : initialLatitude}
           onChange={(e) => {
             const value = e.target.value;
             if (/^-?\d*\.?\d*$/.test(value)) {
               setLatitude(value);
             }
           }}
-          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
+          className={`flex-grow p-2 border border-gray-300 rounded-[10px] ${!latitude && "text-gray-500"}`}
           placeholder="Enter latitude"
         />
       </div>
@@ -67,14 +69,14 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
         <label className="block text-sm font-medium mb-2">Longitude</label>
         <input
           type="text"
-          value={longitude}
+          value={longitude ? longitude : initialLongitude}
           onChange={(e) => {
             const value = e.target.value;
             if (/^-?\d*\.?\d*$/.test(value)) {
               setLongitude(value);
             }
           }}
-          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
+          className={`flex-grow p-2 border border-gray-300 rounded-[10px] ${!longitude && "text-gray-500"}`}
           placeholder="Enter longitude"
         />
       </div>

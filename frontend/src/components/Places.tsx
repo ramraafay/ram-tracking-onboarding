@@ -18,6 +18,8 @@ interface PlacesProps {
 
 const Places: React.FC<PlacesProps> = ({ authToken }) => {
   const [details, viewDetails] = useState(false);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
 
   const { data, loading, refetch } = useFetch<PlaceDTO[]>(
     "http://localhost:8080/places",
@@ -47,37 +49,12 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
     }
   };
 
-  const post = async (latitude: number, longitude: number) => {
-    try {
-      const place: PlaceDTO = {
-        name: "test",
-        latitude: latitude,
-        longitude: longitude,
-      };
-      const response = await fetch("http://localhost:8080/places", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(place),
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const responseData = await response.json();
-      console.log("Success:", responseData);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   const MapEvents = () => {
     useMapEvents({
       contextmenu(e) {
-        post(e.latlng.lat, e.latlng.lng);
+        viewDetails(true);
+        setLatitude(e.latlng.lat);
+        setLongitude(e.latlng.lng);
         refetch();
       },
     });
@@ -149,7 +126,11 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
               ))}
           </MapContainer>
         ) : (
-          <AddPlace authToken={authToken} />
+          <AddPlace
+            authToken={authToken}
+            initialLatitude={latitude}
+            initialLongitude={longitude}
+          />
         )}
         <FavouritePlaces authToken={authToken} />
       </div>
