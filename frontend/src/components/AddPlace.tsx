@@ -35,7 +35,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="p-4 bg-white rounded-lg shadow-md w-full h-1/2">
       <h2 className="text-xl font-bold mb-4">Add a New Place</h2>
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Place Name</label>
