@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { AuthContext, IAuthContext } from "react-oauth2-code-pkce";
 import Button from "./Button";
 import { ButtonColour } from "../types/ButtonColor";
-import Places from "./Places";
+import Main from "./Main";
 
-function Login() {
+function LoginManager() {
   const auth: IAuthContext = useContext(AuthContext);
   return (
     <div>
@@ -20,7 +20,7 @@ function Login() {
             Logout
           </Button>
           <div className="mt-4 flex flex-col">
-            <Places authToken={auth.token} />
+            <Main authToken={auth.token} />
           </div>
         </div>
       )}
@@ -28,4 +28,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginManager;

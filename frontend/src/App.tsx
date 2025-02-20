@@ -1,6 +1,6 @@
 import { AuthProvider, TAuthConfig } from "react-oauth2-code-pkce";
 import Header from "./components/Header";
-import Login from "./components/Login";
+import LoginManager from "./components/LoginManager";
 
 function App() {
   const authConfig: TAuthConfig = {
@@ -20,7 +20,7 @@ function App() {
       <div className="w-full h-full mx-auto max-w-screen-lg px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <AuthProvider authConfig={authConfig}>
           <Header />
-          <Login />
+          <LoginManager />
         </AuthProvider>
       </div>
     </div>

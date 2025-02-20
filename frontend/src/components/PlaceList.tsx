@@ -4,7 +4,7 @@ import { PlaceDTO } from "../types/PlaceDTO";
 import Button from "./Button";
 import { ButtonColour } from "../types/ButtonColor";
 
-const FavouritePlaces: React.FC<{
+const PlaceList: React.FC<{
   authToken: string;
   onPlaceDelete: () => void;
 }> = ({ authToken, onPlaceDelete }) => {
@@ -101,4 +101,4 @@ const FavouritePlaces: React.FC<{
   );
 };
 
-export default FavouritePlaces;
+export default PlaceList;

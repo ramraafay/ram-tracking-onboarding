@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PlaceDTO } from "../types/PlaceDTO";
 import { ButtonColour } from "../types/ButtonColor";
 
-const AddPlace: React.FC<{
+const AddPlaceForm: React.FC<{
   authToken: string;
   initialLatitude: number;
   initialLongitude: number;
@@ -92,4 +92,4 @@ const AddPlace: React.FC<{
   );
 };
 
-export default AddPlace;
+export default AddPlaceForm;

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
 import { ButtonColour } from "../types/ButtonColor";
+import AddPlaceForm from "./AddPlaceForm";
+import PlaceList from "./PlaceList";
 import {
   MapContainer,
   Marker,
@@ -9,14 +11,8 @@ import {
   TileLayer,
   useMapEvents,
 } from "react-leaflet";
-import FavouritePlaces from "./FavouritePlaces";
-import AddPlace from "./AddPlace";
 
-interface PlacesProps {
-  authToken: string;
-}
-
-const Places: React.FC<PlacesProps> = ({ authToken }) => {
+const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
   const [details, viewDetails] = useState(false);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -130,17 +126,17 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
               ))}
           </MapContainer>
         ) : (
-          <AddPlace
+          <AddPlaceForm
             authToken={authToken}
             initialLatitude={latitude}
             initialLongitude={longitude}
             onPlaceAdd={handleAdd}
           />
         )}
-        <FavouritePlaces authToken={authToken} onPlaceDelete={refetch} />
+        <PlaceList authToken={authToken} onPlaceDelete={refetch} />
       </div>
     </div>
   );
 };
 
-export default Places;
+export default Main;
