@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
 import { ButtonColour } from "../types/ButtonColor";
@@ -17,6 +17,8 @@ interface PlacesProps {
 }
 
 const Places: React.FC<PlacesProps> = ({ authToken }) => {
+  const [details, viewDetails] = useState(false);
+
   const { data, loading, refetch } = useFetch<PlaceDTO[]>(
     "http://localhost:8080/places",
     {
@@ -85,50 +87,72 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
   return loading ? (
     <h1>Loading..</h1>
   ) : (
-    <div className="flex flex-col gap-4">
-      <MapContainer
-        center={[51.505, -0.09]}
-        zoom={13}
-        scrollWheelZoom={false}
-        className="p-4 bg-white rounded-lg shadow-md"
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <MapEvents />
-        {data &&
-          data.map((place) => (
-            <Marker key={place.id} position={[place.latitude, place.longitude]}>
-              <Popup>
-                <div>
-                  <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600 tracking-wider">
-                    <span className="w-1/5">{place.id}</span>
-                  </div>
-                  <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600 tracking-wider">
-                    <span className="w-1/5">{place.name}</span>
-                  </div>
-                  <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600  tracking-wider">
-                    <span className="w-1/5">{place.latitude}</span>
-                  </div>
-                  <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600  tracking-wider">
-                    <span className="w-1/5">{place.longitude}</span>
-                  </div>
-                  <div className="flex justify-center py-3">
-                    <button
-                      className={`inline-block rounded-sm ${ButtonColour.Red} px-5 py-3 text-sm font-medium text-white transition hover:bg-black focus:ring-3 focus:outline-hidden text-nowrap w-full`}
-                      onClick={() => handleDelete(place.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
-      </MapContainer>
-      <AddPlace authToken={authToken} />
-      <FavouritePlaces authToken={authToken} />
+    <div>
+      <div className="flex border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-t-[10px] shadow-md">
+        <div
+          onClick={() => viewDetails(false)}
+          className="flex-1 text-center cursor-pointer px-5 py-3"
+        >
+          Map
+        </div>
+        <div
+          onClick={() => viewDetails(true)}
+          className="flex-1 text-center cursor-pointer px-5 py-3"
+        >
+          Details
+        </div>
+      </div>
+      <div className="flex flex-col gap-4">
+        {!details ? (
+          <MapContainer
+            center={[51.505, -0.09]}
+            zoom={13}
+            scrollWheelZoom={false}
+            className="p-4 bg-white shadow-md"
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <MapEvents />
+            {data &&
+              data.map((place) => (
+                <Marker
+                  key={place.id}
+                  position={[place.latitude, place.longitude]}
+                >
+                  <Popup>
+                    <div>
+                      <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600 tracking-wider">
+                        <span className="w-1/5">{place.id}</span>
+                      </div>
+                      <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600 tracking-wider">
+                        <span className="w-1/5">{place.name}</span>
+                      </div>
+                      <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600  tracking-wider">
+                        <span className="w-1/5">{place.latitude}</span>
+                      </div>
+                      <div className="flex items-center px-5 py-3 border-b border-gray-200  text-left text-xs font-semibold text-gray-600  tracking-wider">
+                        <span className="w-1/5">{place.longitude}</span>
+                      </div>
+                      <div className="flex justify-center py-3">
+                        <button
+                          className={`inline-block rounded-[5px] ${ButtonColour.Red} px-5 py-3 text-sm font-medium text-white transition hover:bg-black focus:ring-3 focus:outline-hidden text-nowrap w-full`}
+                          onClick={() => handleDelete(place.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </Popup>
+                </Marker>
+              ))}
+          </MapContainer>
+        ) : (
+          <AddPlace authToken={authToken} />
+        )}
+        <FavouritePlaces authToken={authToken} />
+      </div>
     </div>
   );
 };

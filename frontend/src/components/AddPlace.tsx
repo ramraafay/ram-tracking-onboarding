@@ -36,7 +36,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md w-full h-[50vh] flex flex-col justify-between">
+    <div className="p-4 bg-white rounded-b-[10px] shadow-md w-full h-[50vh] flex flex-col justify-between">
       <h2 className="text-xl font-bold mb-4">Add a New Place</h2>
       <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Place Name</label>
@@ -44,7 +44,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="flex-grow p-2 border border-gray-300 rounded-lg"
+          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
           placeholder="Enter place name"
         />
       </div>
@@ -59,7 +59,7 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
               setLatitude(value);
             }
           }}
-          className="flex-grow p-2 border border-gray-300 rounded-lg"
+          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
           placeholder="Enter latitude"
         />
       </div>
@@ -74,13 +74,13 @@ const AddPlace: React.FC<{ authToken: string }> = ({ authToken }) => {
               setLongitude(value);
             }
           }}
-          className="flex-grow p-2 border border-gray-300 rounded-lg"
+          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
           placeholder="Enter longitude"
         />
       </div>
       <button
         onClick={post}
-        className={`inline-block rounded-sm ${ButtonColour.Blue} px-5 py-3 text-sm font-medium text-white transition hover:bg-black focus:ring-3 focus:outline-hidden text-nowrap w-full`}
+        className={`inline-block rounded-[5px] ${ButtonColour.Blue} px-5 py-3 text-sm font-medium text-white transition hover:bg-black focus:ring-3 focus:outline-hidden text-nowrap w-full`}
       >
         Add Place
       </button>

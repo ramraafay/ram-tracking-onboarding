@@ -34,7 +34,7 @@ const FavouritePlaces: React.FC<{ authToken: string }> = ({ authToken }) => {
   };
 
   return (
-    <div className="rounded bg-white shadow-md overflow-hidden">
+    <div className="rounded-[10px] bg-white shadow-md overflow-hidden">
       <table className="min-w-full leading-normal">
         <thead>
           <tr>
