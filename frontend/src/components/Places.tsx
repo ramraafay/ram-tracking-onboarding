@@ -86,7 +86,12 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
     <h1>Loading..</h1>
   ) : (
     <div className="flex flex-col gap-4">
-      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+      <MapContainer
+        center={[51.505, -0.09]}
+        zoom={13}
+        scrollWheelZoom={false}
+        className="p-4 bg-white rounded-lg shadow-md"
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
