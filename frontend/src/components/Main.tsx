@@ -13,7 +13,7 @@ import {
 } from "react-leaflet";
 
 const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
-  const [details, viewDetails] = useState(false);
+  const [addPlace, viewAddPlace] = useState(false);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
@@ -46,7 +46,7 @@ const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
   };
 
   const handleAdd = () => {
-    viewDetails(details ? false : true);
+    viewAddPlace(addPlace ? false : true);
     refetch();
   };
 
@@ -67,20 +67,20 @@ const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
     <div>
       <div className="flex border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-t-[10px] shadow-md">
         <button
-          onClick={() => viewDetails(false)}
-          className={`flex-1 text-center cursor-pointer px-5 py-3 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden rounded-tl-[10px] ${!details && `${ButtonColour.Blue} text-white`}`}
+          onClick={() => viewAddPlace(false)}
+          className={`flex-1 text-center cursor-pointer px-5 py-3 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden rounded-tl-[10px] ${!addPlace && `${ButtonColour.Blue} text-white`}`}
         >
           Map
         </button>
         <button
-          onClick={() => viewDetails(true)}
-          className={`flex-1 text-center cursor-pointer px-5 py-3 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden rounded-tr-[10px] ${details && `${ButtonColour.Blue} text-white`}`}
+          onClick={() => viewAddPlace(true)}
+          className={`flex-1 text-center cursor-pointer px-5 py-3 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden rounded-tr-[10px] ${addPlace && `${ButtonColour.Blue} text-white`}`}
         >
-          Details
+          Add Place
         </button>
       </div>
       <div className="flex flex-col gap-4">
-        {!details ? (
+        {!addPlace ? (
           <MapContainer
             center={[51.505, -0.09]}
             zoom={13}

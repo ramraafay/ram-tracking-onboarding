@@ -1,8 +1,6 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
-import Button from "./Button";
-import { ButtonColour } from "../types/ButtonColor";
 
 const PlaceList: React.FC<{
   authToken: string;

@@ -41,7 +41,7 @@ const AddPlaceForm: React.FC<{
 
   return (
     <div className="p-4 bg-white rounded-b-[10px] shadow-md w-full h-[50vh] flex flex-col justify-between">
-      <h2 className="text-xl font-bold mb-4">Add a New Place</h2>
+      <h2 className="text-xl font-bold mb-4">Add Place</h2>
       <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Place Name</label>
         <input
@@ -88,7 +88,7 @@ const AddPlaceForm: React.FC<{
         onClick={post}
         className={`inline-block rounded-[5px] ${ButtonColour.Blue} px-5 py-3 text-sm font-medium text-white transition hover:bg-black focus:ring-3 focus:outline-hidden text-nowrap w-full`}
       >
-        Add Place
+        Add
       </button>
     </div>
   );
