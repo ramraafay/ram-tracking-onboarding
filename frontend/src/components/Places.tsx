@@ -1,7 +1,6 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
-import Button from "./Button";
 import { ButtonColour } from "../types/ButtonColor";
 import {
   MapContainer,
@@ -18,7 +17,7 @@ interface PlacesProps {
 }
 
 const Places: React.FC<PlacesProps> = ({ authToken }) => {
-  const { data, loading, error, refetch } = useFetch<PlaceDTO[]>(
+  const { data, loading, refetch } = useFetch<PlaceDTO[]>(
     "http://localhost:8080/places",
     {
       token: authToken,
@@ -123,21 +122,6 @@ const Places: React.FC<PlacesProps> = ({ authToken }) => {
             </Marker>
           ))}
       </MapContainer>
-      <Button
-        colour={ButtonColour.Purple}
-        onClick={() => console.log(authToken)}
-      >
-        Print Token
-      </Button>
-      <Button
-        colour={ButtonColour.Purple}
-        onClick={() => console.log(error ? ":-(" : ":-)")}
-      >
-        Check for error
-      </Button>
-      <Button colour={ButtonColour.Purple} onClick={() => console.log(data)}>
-        Print Data
-      </Button>
       <AddPlace authToken={authToken} />
       <FavouritePlaces authToken={authToken} />
     </div>
