@@ -56,30 +56,32 @@ const AddPlaceForm: React.FC<{
         <label className="block text-sm font-medium mb-2">Latitude</label>
         <input
           type="text"
-          value={latitude ? latitude : initialLatitude}
+          placeholder={String(initialLatitude)}
+          defaultValue={initialLatitude}
+          value={latitude}
           onChange={(e) => {
             const value = e.target.value;
             if (/^-?\d*\.?\d*$/.test(value)) {
               setLatitude(value);
             }
           }}
-          className={`flex-grow p-2 border border-gray-300 rounded-[10px] ${!latitude && "text-gray-500"}`}
-          placeholder="Enter latitude"
+          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
         />
       </div>
       <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Longitude</label>
         <input
           type="text"
-          value={longitude ? longitude : initialLongitude}
+          placeholder={String(initialLongitude)}
+          defaultValue={initialLongitude}
+          value={longitude}
           onChange={(e) => {
             const value = e.target.value;
             if (/^-?\d*\.?\d*$/.test(value)) {
               setLongitude(value);
             }
           }}
-          className={`flex-grow p-2 border border-gray-300 rounded-[10px] ${!longitude && "text-gray-500"}`}
-          placeholder="Enter longitude"
+          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
         />
       </div>
       <button
