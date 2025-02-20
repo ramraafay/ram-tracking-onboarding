@@ -19,7 +19,6 @@ function Header() {
               href="https://ramtracking.atlassian.net/wiki/spaces/DEVELOPMEN/pages/3000271009/Tracking+Onboarding+Project"
             >
               <span className="text-sm font-medium">Confluence</span>
-
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="size-4"
