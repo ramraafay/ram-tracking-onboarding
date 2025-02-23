@@ -11,11 +11,13 @@ const AddPlaceForm: React.FC<{
   const [name, setName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const [notes, setNotes] = useState("");
 
   const place: PlaceDTO = {
     name: name,
     latitude: Number(latitude ? latitude : initialLatitude),
     longitude: Number(longitude ? longitude : initialLongitude),
+    notes: notes,
   };
 
   const post = async () => {
@@ -82,6 +84,16 @@ const AddPlaceForm: React.FC<{
             }
           }}
           className="flex-grow p-2 border border-gray-300 rounded-[10px]"
+        />
+      </div>
+      <div className="mb-4 flex flex-col h-full">
+        <label className="block text-sm font-medium mb-2">Notes</label>
+        <input
+          type="text"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
+          placeholder="e.g. reason for visit, opening times"
         />
       </div>
       <button

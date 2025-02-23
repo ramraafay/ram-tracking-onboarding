@@ -3,5 +3,6 @@ export interface PlaceDTO {
   name: string;
   latitude: number;
   longitude: number;
+  notes: string;
   userId?: string;
 }

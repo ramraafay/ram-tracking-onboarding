@@ -52,7 +52,7 @@ const PlaceList: React.FC<{
             <th className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Longitude
             </th>
-            <th className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <th className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Actions
             </th>
           </tr>
@@ -61,7 +61,7 @@ const PlaceList: React.FC<{
           {data && data.length > 0 ? (
             data.map((item, index) => (
               <tr key={index}>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-left">
                   {item.id}
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -73,7 +73,13 @@ const PlaceList: React.FC<{
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {item.longitude}
                 </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="inline-block rounded-[5px] px-5 py-3 text-sm font-medium text-blue-600 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden text-nowrap w-min cursor-pointer"
+                  >
+                    View
+                  </button>
                   <button
                     onClick={() => handleDelete(item.id)}
                     className="inline-block rounded-[5px] px-5 py-3 text-sm font-medium text-red-600 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden text-nowrap w-min cursor-pointer"
