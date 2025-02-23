@@ -43,7 +43,6 @@ const AddPlaceForm: React.FC<{
 
   return (
     <div className="p-4 bg-white rounded-b-[10px] shadow-md w-full h-[50vh] flex flex-col justify-between">
-      <h2 className="text-xl font-bold mb-4">Add Place</h2>
       <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Place Name</label>
         <input
@@ -54,37 +53,39 @@ const AddPlaceForm: React.FC<{
           placeholder="Enter place name"
         />
       </div>
-      <div className="mb-4 flex flex-col h-full">
-        <label className="block text-sm font-medium mb-2">Latitude</label>
-        <input
-          type="text"
-          placeholder={String(initialLatitude)}
-          defaultValue={initialLatitude}
-          value={latitude}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^-?\d*\.?\d*$/.test(value)) {
-              setLatitude(value);
-            }
-          }}
-          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
-        />
-      </div>
-      <div className="mb-4 flex flex-col h-full">
-        <label className="block text-sm font-medium mb-2">Longitude</label>
-        <input
-          type="text"
-          placeholder={String(initialLongitude)}
-          defaultValue={initialLongitude}
-          value={longitude}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^-?\d*\.?\d*$/.test(value)) {
-              setLongitude(value);
-            }
-          }}
-          className="flex-grow p-2 border border-gray-300 rounded-[10px]"
-        />
+      <div className="mb-4 flex flex-row h-full space-x-4">
+        <div className="flex flex-col flex-1">
+          <label className="block text-sm font-medium mb-2">Latitude</label>
+          <input
+            type="text"
+            placeholder={String(initialLatitude)}
+            defaultValue={initialLatitude}
+            value={latitude}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^-?\d*\.?\d*$/.test(value)) {
+                setLatitude(value);
+              }
+            }}
+            className="flex-grow p-2 border border-gray-300 rounded-[10px]"
+          />
+        </div>
+        <div className="flex flex-col flex-1">
+          <label className="block text-sm font-medium mb-2">Longitude</label>
+          <input
+            type="text"
+            placeholder={String(initialLongitude)}
+            defaultValue={initialLongitude}
+            value={longitude}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^-?\d*\.?\d*$/.test(value)) {
+                setLongitude(value);
+              }
+            }}
+            className="flex-grow p-2 border border-gray-300 rounded-[10px]"
+          />
+        </div>
       </div>
       <div className="mb-4 flex flex-col h-full">
         <label className="block text-sm font-medium mb-2">Notes</label>
