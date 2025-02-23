@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-npm >/dev/null 2>&1
-pnpm dev
