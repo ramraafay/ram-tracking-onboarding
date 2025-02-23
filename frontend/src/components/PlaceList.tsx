@@ -1,6 +1,7 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import { PlaceDTO } from "../types/PlaceDTO";
+import PlaceRow from "./PlaceRow";
 
 const PlaceList: React.FC<{
   authToken: string;
@@ -13,9 +14,9 @@ const PlaceList: React.FC<{
     },
   );
 
-  const handleDelete = async (id?: number) => {
+  const handleDelete = async (place: PlaceDTO) => {
     try {
-      const response = await fetch(`http://localhost:8080/places/${id}`, {
+      const response = await fetch(`http://localhost:8080/places/${place.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -59,35 +60,12 @@ const PlaceList: React.FC<{
         </thead>
         <tbody>
           {data && data.length > 0 ? (
-            data.map((item, index) => (
-              <tr key={index}>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-left">
-                  {item.id}
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {item.name}
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {item.latitude}
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {item.longitude}
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="inline-block rounded-[5px] px-5 py-3 text-sm font-medium text-blue-600 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden text-nowrap w-min cursor-pointer"
-                  >
-                    View
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="inline-block rounded-[5px] px-5 py-3 text-sm font-medium text-red-600 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden text-nowrap w-min cursor-pointer"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
+            data.map((place, index) => (
+              <PlaceRow
+                index={index}
+                place={place}
+                deleteFunction={() => handleDelete(place)}
+              />
             ))
           ) : (
             <tr>
