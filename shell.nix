@@ -6,8 +6,9 @@ pkgs.mkShell {
     # backend
     jdk21
     maven3
-    google-java-format
     postman
+    xmlformat
+    google-java-format
     # frontend
     pnpm
     nodejs_22
@@ -21,11 +22,15 @@ pkgs.mkShell {
     echo "
     backend
     ├── jdk21
-    └── maven3
+    ├── maven3
+    ├── postman
+    ├── xmlformat
+    └── google-java-format
 
     frontend
     ├── pnpm
-    └── nodejs_22
+    ├── nodejs_22
+    └── nodePackages.prettier
     "
   '';
 }
