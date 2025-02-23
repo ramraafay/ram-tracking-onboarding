@@ -4,14 +4,45 @@ import { PlaceDTO } from "../types/PlaceDTO";
 const PlaceRow: React.FC<{
   index: number;
   place: PlaceDTO;
+  authToken: string;
   deleteFunction: () => void;
-  updateFunction: () => void;
-}> = ({ index, place, deleteFunction, updateFunction }) => {
+  postAction: () => void;
+}> = ({ index, place, authToken, deleteFunction, postAction }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [name, setName] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [notes, setNotes] = useState("");
+  const [name, setName] = useState<string>(place.name);
+  const [latitude, setLatitude] = useState<number>(place.latitude);
+  const [longitude, setLongitude] = useState<number>(place.longitude);
+  const [notes, setNotes] = useState<string>(place.notes);
+
+  const updatedPlace: PlaceDTO = {
+    id: place.id,
+    name: name,
+    latitude: Number(latitude),
+    longitude: Number(longitude),
+    notes: notes,
+  };
+
+  const handleUpdate = async (place: PlaceDTO) => {
+    try {
+      const response = await fetch(`http://localhost:8080/places/${place.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(place),
+      });
+
+      if (response.ok) {
+        console.log("Update successful");
+      } else {
+        console.error("Update failed");
+      }
+    } catch (error) {
+      console.error("Error during update request", error);
+    }
+    postAction();
+  };
 
   return !editMode ? (
     <tr key={index}>
@@ -51,21 +82,22 @@ const PlaceRow: React.FC<{
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
           placeholder={place.name}
+          defaultValue={place.name}
+          onChange={(e) => setName(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-[10px]"
         />
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <input
           type="text"
+          value={latitude}
           placeholder={String(place.latitude)}
           defaultValue={place.latitude}
-          value={latitude}
           onChange={(e) => {
             const value = e.target.value;
             if (/^-?\d*\.?\d*$/.test(value)) {
-              setLatitude(value);
+              setLatitude(Number(value));
             }
           }}
           className="w-full p-2 border border-gray-300 rounded-[10px]"
@@ -74,13 +106,13 @@ const PlaceRow: React.FC<{
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <input
           type="text"
+          value={longitude}
           placeholder={String(place.longitude)}
           defaultValue={place.longitude}
-          value={longitude}
           onChange={(e) => {
             const value = e.target.value;
             if (/^-?\d*\.?\d*$/.test(value)) {
-              setLongitude(value);
+              setLongitude(Number(value));
             }
           }}
           className="w-full p-2 border border-gray-300 rounded-[10px]"
@@ -90,8 +122,8 @@ const PlaceRow: React.FC<{
         <button
           onClick={() => {
             setEditMode(false);
-            updateFunction();
-            console.log(place);
+            console.log(updatedPlace);
+            handleUpdate(updatedPlace);
           }}
           className="inline-block rounded-[5px] px-5 py-3 text-sm font-medium text-green-600 transition hover:bg-black hover:text-white focus:ring-3 focus:outline-hidden text-nowrap w-min cursor-pointer"
         >
