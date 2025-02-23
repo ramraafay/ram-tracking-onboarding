@@ -14,6 +14,28 @@ const PlaceList: React.FC<{
     },
   );
 
+  const handleUpdate = async (place: PlaceDTO) => {
+    try {
+      const response = await fetch(`http://localhost:8080/places/${place.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(place),
+      });
+
+      if (response.ok) {
+        console.log("Update successful");
+        refetch();
+      } else {
+        console.error("Update failed");
+      }
+    } catch (error) {
+      console.error("Error during update request", error);
+    }
+  };
+
   const handleDelete = async (place: PlaceDTO) => {
     try {
       const response = await fetch(`http://localhost:8080/places/${place.id}`, {
@@ -65,6 +87,7 @@ const PlaceList: React.FC<{
                 index={index}
                 place={place}
                 deleteFunction={() => handleDelete(place)}
+                updateFunction={() => handleUpdate(place)}
               />
             ))
           ) : (
