@@ -25,9 +25,9 @@ const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
     },
   );
 
-  const handleDelete = async (id?: number) => {
+  const handleDelete = async (place: PlaceDTO) => {
     try {
-      const response = await fetch(`http://localhost:8080/places/${id}`, {
+      const response = await fetch(`http://localhost:8080/places/${place.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -101,11 +101,8 @@ const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
                 >
                   <Popup>
                     <PlaceInfo
-                      name={place.name}
-                      latitude={place.latitude}
-                      longitude={place.longitude}
-                      notes={place.notes}
-                      deleteFunction={() => handleDelete(place.id)}
+                      place={place}
+                      deleteFunction={() => handleDelete(place)}
                     />
                   </Popup>
                 </Marker>
