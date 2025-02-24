@@ -6,6 +6,16 @@ Project to familiarise myself with the RAM Tracking technology stack.
 - nix
 - direnv (optional)
 
+Or if you don't want to use nix…
+
+### Backend Dependencies
+- jdk21
+- maven3
+
+### Frontend Dependencies
+- nodejs_22
+- pnpm
+
 ## Setup
 Activate development environment by running…
 
