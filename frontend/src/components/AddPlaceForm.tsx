@@ -65,7 +65,10 @@ const AddPlaceForm: React.FC<{
               const value = e.target.value;
               if (/^-?\d*\.?\d*$/.test(value)) {
                 const numValue = parseFloat(value);
-                if (!isNaN(numValue) && numValue >= -90 && numValue <= 90) {
+                if (
+                  (!isNaN(numValue) && numValue >= -90 && numValue <= 90) ||
+                  value == ""
+                ) {
                   setLatitude(value);
                 }
               }
@@ -84,7 +87,10 @@ const AddPlaceForm: React.FC<{
               const value = e.target.value;
               if (/^-?\d*\.?\d*$/.test(value)) {
                 const numValue = parseFloat(value);
-                if (!isNaN(numValue) && numValue >= -180 && numValue <= 180) {
+                if (
+                  (!isNaN(numValue) && numValue >= -180 && numValue <= 180) ||
+                  value == ""
+                ) {
                   setLongitude(value);
                 }
               }
