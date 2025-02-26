@@ -64,7 +64,10 @@ const AddPlaceForm: React.FC<{
             onChange={(e) => {
               const value = e.target.value;
               if (/^-?\d*\.?\d*$/.test(value)) {
-                setLatitude(value);
+                const numValue = parseFloat(value);
+                if (!isNaN(numValue) && numValue >= -90 && numValue <= 90) {
+                  setLatitude(value);
+                }
               }
             }}
             className="flex-grow p-2 border border-gray-300 rounded-[10px]"
@@ -80,7 +83,10 @@ const AddPlaceForm: React.FC<{
             onChange={(e) => {
               const value = e.target.value;
               if (/^-?\d*\.?\d*$/.test(value)) {
-                setLongitude(value);
+                const numValue = parseFloat(value);
+                if (!isNaN(numValue) && numValue >= -180 && numValue <= 180) {
+                  setLongitude(value);
+                }
               }
             }}
             className="flex-grow p-2 border border-gray-300 rounded-[10px]"
