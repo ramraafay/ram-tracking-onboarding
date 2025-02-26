@@ -1,5 +1,7 @@
 package com.raftracking.backend;
 
+import com.amazonaws.services.alexaforbusiness.model.UnauthorizedException;
+
 import lombok.*;
 
 import org.springframework.http.HttpStatus;
@@ -22,8 +24,12 @@ public class PlaceController {
      */
     @GetMapping
     public List<Place> getPlaces(Authentication authentication) {
-        String userId = authentication.getName();
-        return placeRepository.findByUserId(userId);
+        if (authentication.isAuthenticated()) {
+            String userId = authentication.getName();
+            return placeRepository.findByUserId(userId);
+        } else {
+            throw new UnauthorizedException("User is not authenticated");
+        }
     }
 
     /**
@@ -32,8 +38,12 @@ public class PlaceController {
      */
     @PostMapping
     public Place addPlace(@RequestBody Place place, Authentication authentication) {
-        place.setUserId(authentication.getName());
-        return placeRepository.save(place);
+        if (authentication.isAuthenticated()) {
+            place.setUserId(authentication.getName());
+            return placeRepository.save(place);
+        } else {
+            throw new UnauthorizedException("User is not authenticated");
+        }
     }
 
     /**
@@ -43,13 +53,17 @@ public class PlaceController {
     @PutMapping("/{id}")
     public Place updatePlace(
             @PathVariable Long id, @RequestBody Place updatedPlace, Authentication authentication) {
-        Place place = placeRepository.findById(id).orElseThrow();
-        if (!place.getUserId().equals(authentication.getName())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        if (authentication.isAuthenticated()) {
+            Place place = placeRepository.findById(id).orElseThrow();
+            if (!place.getUserId().equals(authentication.getName())) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+            }
+            updatedPlace.setId(id);
+            updatedPlace.setUserId(place.getUserId());
+            return placeRepository.save(updatedPlace);
+        } else {
+            throw new UnauthorizedException("User is not authenticated");
         }
-        updatedPlace.setId(id);
-        updatedPlace.setUserId(place.getUserId());
-        return placeRepository.save(updatedPlace);
     }
 
     /**
@@ -58,10 +72,14 @@ public class PlaceController {
      */
     @DeleteMapping("/{id}")
     public void deletePlace(@PathVariable Long id, Authentication authentication) {
-        Place place = placeRepository.findById(id).orElseThrow();
-        if (!place.getUserId().equals(authentication.getName())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        if (authentication.isAuthenticated()) {
+            Place place = placeRepository.findById(id).orElseThrow();
+            if (!place.getUserId().equals(authentication.getName())) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+            }
+            placeRepository.delete(place);
+        } else {
+            throw new UnauthorizedException("User is not authenticated");
         }
-        placeRepository.delete(place);
     }
 }
