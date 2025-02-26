@@ -20,6 +20,7 @@ pkgs.mkShell {
     '')
     (pkgs.writeScriptBin "frontend" ''
       #!${pkgs.stdenv.shell}
+      npm -v &> /dev/null
       cd $PROJECT_HOME/frontend && pnpm dev
     '')
     (pkgs.writeScriptBin "test" ''
