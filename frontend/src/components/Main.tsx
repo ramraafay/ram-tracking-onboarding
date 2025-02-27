@@ -12,6 +12,7 @@ import {
   TileLayer,
   useMapEvents,
 } from "react-leaflet";
+import RecenterAutomatically from "./RecenterAutomatically";
 
 const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
   const [addPlace, viewAddPlace] = useState(false);
@@ -95,17 +96,23 @@ const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
             <MapEvents />
             {data &&
               data.map((place) => (
-                <Marker
-                  key={place.id}
-                  position={[place.latitude, place.longitude]}
-                >
-                  <Popup>
-                    <PlaceInfo
-                      place={place}
-                      deleteFunction={() => handleDelete(place)}
-                    />
-                  </Popup>
-                </Marker>
+                <div>
+                  <Marker
+                    key={place.id}
+                    position={[place.latitude, place.longitude]}
+                  >
+                    <Popup>
+                      <PlaceInfo
+                        place={place}
+                        deleteFunction={() => handleDelete(place)}
+                      />
+                    </Popup>
+                  </Marker>
+                  <RecenterAutomatically
+                    latitude={place.latitude}
+                    longitude={place.longitude}
+                  />
+                </div>
               ))}
           </MapContainer>
         ) : (
