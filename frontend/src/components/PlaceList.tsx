@@ -62,6 +62,7 @@ const PlaceList: React.FC<{
           {data && data.length > 0 ? (
             data.map((place, index) => (
               <PlaceRow
+                key={index}
                 index={index}
                 place={place}
                 authToken={authToken}
