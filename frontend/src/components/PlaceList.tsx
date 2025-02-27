@@ -5,14 +5,11 @@ import PlaceRow from "./PlaceRow";
 
 const PlaceList: React.FC<{
   authToken: string;
-  onPlaceDelete: () => void;
-}> = ({ authToken, onPlaceDelete }) => {
-  const { data, refetch } = useFetch<PlaceDTO[]>(
-    "http://localhost:8080/places",
-    {
-      token: authToken,
-    },
-  );
+  refetch: () => void;
+}> = ({ authToken, refetch }) => {
+  const { data } = useFetch<PlaceDTO[]>("http://localhost:8080/places", {
+    token: authToken,
+  });
 
   const handleDelete = async (place: PlaceDTO) => {
     try {
@@ -33,7 +30,7 @@ const PlaceList: React.FC<{
     } catch (error) {
       console.error("Error during delete request", error);
     }
-    onPlaceDelete();
+    refetch();
   };
 
   return (
@@ -67,7 +64,7 @@ const PlaceList: React.FC<{
                 place={place}
                 authToken={authToken}
                 deleteFunction={() => handleDelete(place)}
-                postAction={refetch}
+                postAction={() => refetch()}
               />
             ))
           ) : (

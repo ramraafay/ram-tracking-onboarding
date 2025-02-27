@@ -123,7 +123,7 @@ const Main: React.FC<{ authToken: string }> = ({ authToken }) => {
             onPlaceAdd={handleAdd}
           />
         )}
-        <PlaceList authToken={authToken} onPlaceDelete={refetch} />
+        <PlaceList authToken={authToken} refetch={refetch} />
       </div>
     </div>
   );
