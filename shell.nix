@@ -23,11 +23,6 @@ pkgs.mkShell {
       npm -v &> /dev/null
       cd $PROJECT_HOME/frontend && pnpm dev
     '')
-    (pkgs.writeScriptBin "test" ''
-      #!${pkgs.stdenv.shell}
-      cd $PROJECT_HOME/backend && mvn test
-      cd $PROJECT_HOME/frontend && pnpm test
-    '')
   ];
 
   shellHook = ''
